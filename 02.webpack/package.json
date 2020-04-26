@@ -10,7 +10,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "style-loader": "^1.2.0",
+    "url-loader": "^4.1.0"
+  },
   "devDependencies": {
     "webpack-cli": "^3.3.11",
     "webpack": "^4.43.0"
