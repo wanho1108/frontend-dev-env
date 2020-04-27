@@ -5,10 +5,13 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const apiMocker = require('connect-api-mocker');
+const CopyPlugin = require('copy-webpack-plugin');
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode: 'development',
+  mode,
   entry: {
     main: './src/app.js'
   },
@@ -57,8 +60,22 @@ module.exports = {
     ]
   },
   optimization: {
-    minimize: true,
-    minimizer: [new OptimizeCSSAssetsPlugin({})]
+    minimizer: mode === 'production' ? [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          }
+        }
+      }),
+      new OptimizeCSSAssetsPlugin()
+    ] : [],
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+  externals: {
+    axios: 'axios'
   },
   plugins: [
     new webpack.BannerPlugin({
@@ -87,6 +104,10 @@ module.exports = {
     ...(process.env.NODE_ENV === 'production'
       ? [new MiniCssExtractPlugin({ filename: '[name].css' })]
       : []
-      )
+    ),
+    new CopyPlugin([{
+      from: './node_modules/axios/dist/axios.min.js',
+      to: './axios.min.js'
+    }])
   ]
 };

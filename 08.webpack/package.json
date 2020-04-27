@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "cross-env NODE_ENV=production webpack --progress",
     "start": "webpack-dev-server --progress"
   },
   "keywords": [],
@@ -15,12 +15,15 @@
     "axios": "^0.19.2",
     "clean-webpack-plugin": "^3.0.0",
     "connect-api-mocker": "^1.9.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^1.2.0",
+    "terser-webpack-plugin": "^2.3.6",
     "url-loader": "^4.1.0",
     "webpack-dev-server": "^3.10.3"
   },
