@@ -1,7 +1,7 @@
 import './app.css';
-import nyancat from './nyancat.jpg';
+// import nyancat from './nyancat.jpg';
 import axios from 'axios';
-import * as math from 'math';
+import * as math from './math';
 
 window.addEventListener('DOMContentLoaded', async () => {
 
@@ -24,7 +24,7 @@ console.log(api.domain);
 if (module.hot) {
   console.log('핫 모듈 켜짐');
 
-  module.hot.accpet('./math', () => {
+  module.hot.accept('./math', () => {
     console.log('math 모듈 변경됨');
   });
 }
