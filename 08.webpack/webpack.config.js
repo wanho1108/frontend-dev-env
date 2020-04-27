@@ -33,7 +33,8 @@ module.exports = {
       //     name: 'Chris'
       //   }])
       // })
-    }
+    },
+    hot: true
   },
   module: {
     rules: [
