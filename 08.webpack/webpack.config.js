@@ -5,6 +5,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const apiMocker = require('connect-api-mocker');
 
 module.exports = {
   mode: 'development',
@@ -17,7 +18,22 @@ module.exports = {
   },
   devServer: {
     overlay: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    before: app => {
+      app.use(apiMocker('/api', 'mocks/api'));
+      // app.get('/api/users', (req, res) => {
+      //   res.json([{
+      //     id: 1,
+      //     name: 'Alice'
+      //   }, {
+      //     id: 2,
+      //     name: 'Bek'
+      //   }, {
+      //     id: 3,
+      //     name: 'Chris'
+      //   }])
+      // })
+    }
   },
   module: {
     rules: [
